@@ -1,4 +1,5 @@
 #include "QScreenScraperAPIClient.hpp"
+#include "CRequest.hpp"
 
 #include <QMap>
 
@@ -17,8 +18,17 @@ const QString QScreenScraperAPIClient::s_sRestAPIWordMD5 = "md5";
 const QString QScreenScraperAPIClient::s_sRestAPIWordSHA1 = "sha1";
 
 const QString QScreenScraperAPIClient::s_sRestAPIWordRomType = "romtype";
-const QString QScreenScraperAPIClient::s_sRestAPIWordRomName;
-const QString QScreenScraperAPIClient::s_sRestAPIWordRomSize;
+const QString QScreenScraperAPIClient::s_sRestAPIWordRomName = "romnom";
+const QString QScreenScraperAPIClient::s_sRestAPIWordRomSize = "romtaille";
+
+const QString QScreenScraperAPIClient::s_sRestAPIWordURLSystemList = "systemesListe.php";
+const QString QScreenScraperAPIClient::s_sRestAPIWordURLSupportTypeList = "supportTypesListe.php";
+const QString QScreenScraperAPIClient::s_sRestAPIWordURLRomTypeList = "romTypesListe.php";
+const QString QScreenScraperAPIClient::s_sRestAPIWordURLSystemMedia = "mediaSysteme.php";
+const QString QScreenScraperAPIClient::s_sRestAPIWordURLSystemMediaVideo = "mediaVideoSysteme.php";
+const QString QScreenScraperAPIClient::s_sRestAPIWordURLGameinfo = "jeuInfos.php";
+const QString QScreenScraperAPIClient::s_sRestAPIWordURLGameMedia = "mediaJeu.php";
+const QString QScreenScraperAPIClient::s_sRestAPIWordURLGameMediaVideo = "mediaVideoJeu.php";
 
 enum EPlatformType
 {
@@ -93,7 +103,8 @@ bool QScreenScraperAPIClient::connect()
 
 	if(m_oNetworkAccessManager.networkAccessible() != QNetworkAccessManager::Accessible)
 	{
-
+		// TODO ERROR
+		return false;
 	}
 }
 
@@ -108,9 +119,16 @@ bool QScreenScraperAPIClient::setProxy(QNetworkProxy::ProxyType eProxyType, QStr
 bool QScreenScraperAPIClient::requestPlatformList()
 {
 	QUrl l_oURL = m_oServerHostURL;
+	l_oURL += s_sRestAPIWordURLSystemList + "?";
 	QUrlQuery l_oURLQuery;
-	l_oURLQuery.
-	l_oURL.setHost();
+	l_oURLQuery.add(s_sRestAPIWordClientId, m_sUserId);
+	l_oURLQuery.add(s_sRestAPIWordPassword, m_sUserPassword);
+	l_oURLQuery.add(s_sRestAPIWordSoftware, m_sSoftwareName);
+	l_oURLQuery.add(s_sRestAPIWordOutput, "json");
+	l_oURL.setQuery(l_oURLQuery);
+	CRequest l_oRequest;
+	l_oRequest.requestCommand();
+
 	return true;
 }
 

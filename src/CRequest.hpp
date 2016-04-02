@@ -15,13 +15,13 @@ class CRequest : public QObject
 	Q_OBJECT
 
 public:
-	CRequest(QUrl oUrl);
+	CRequest(const QUrl& oQUrl);
 	bool send();
 	bool abortIt();
 	const QByteArray* getResult();
 
 private:
-	bool requestCommand(QUrlQuery oUrlQuery);
+	bool requestCommand();
 
 	bool m_bIsFile;
 	bool m_bIsFinished;
@@ -35,6 +35,8 @@ private:
 	QScreenScraperAPIClient* m_pScreenScraperAPIClient;
 
 	QByteArray m_ui8VRequestHeaderUserAgent;
+
+	QUrl m_oQUrl;
 
 private Q_SLOTS:
 	void slotNetworkReplyFinished();

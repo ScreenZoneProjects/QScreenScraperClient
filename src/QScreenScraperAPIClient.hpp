@@ -21,7 +21,6 @@ public:
 	QScreenScraperAPIClient();
 	bool connect();
 
-
 	bool setProxy(QNetworkProxy::ProxyType eProxyType, QString sHostName, quint16 uint16Port, QString sUser, QString sPassword);
 
 	QString getUserId() const;
@@ -96,4 +95,12 @@ private:
 	static const QString s_sRestAPIWordRomName;
 	static const QString s_sRestAPIWordRomSize;
 
+	static const QString s_sRestAPIWordURLSystemList;
+	static const QString s_sRestAPIWordURLSupportTypeList;
+	static const QString s_sRestAPIWordURLRomTypeList;
+	static const QString s_sRestAPIWordURLSystemMedia;
+	static const QString s_sRestAPIWordURLSystemMediaVideo;
+	static const QString s_sRestAPIWordURLGameinfo;
+	static const QString s_sRestAPIWordURLGameMedia;
+	static const QString s_sRestAPIWordURLGameMediaVideo;
 };

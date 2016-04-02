@@ -1,6 +1,7 @@
 #include "CRequest.hpp"
 
-CRequest::CRequest()
+CRequest::CRequest(const QUrl& oQUrl):
+	m_oQUrl(oQUrl)
 {
 }
 
@@ -14,12 +15,9 @@ bool abortIt()
 	return true;
 }
 
-bool CRequest::requestCommand(QUrlQuery oUrlQuery)
+bool CRequest::requestCommand()
 {
-	QUrl l_oURL = m_pScreenScraperAPIClient->getServerHostURL();
-	l_oURL.setQuery(oUrlQuery);
-
-	QNetworkRequest l_oRequest(l_oURL);
+	QNetworkRequest l_oRequest(m_oQUrl);
 	l_oRequest.setRawHeader(QByteArray("Host"), m_pScreenScraperAPIClient->getServerHostURL().toString().toUtf8());
 	QString l_sUserAgent = m_pScreenScraperAPIClient->getAPIClientName() + " " + m_pScreenScraperAPIClient->getVersion();
 	l_oRequest.setRawHeader(QByteArray("User-Agent"), l_sUserAgent.toUtf8());
